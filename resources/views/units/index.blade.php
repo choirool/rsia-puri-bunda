@@ -10,4 +10,8 @@
             <unit-index />
         </div>
     </div>
+
+    @push('scripts')
+    @vite(['resources/js/units.js'])
+    @endpush
 </x-app-layout>

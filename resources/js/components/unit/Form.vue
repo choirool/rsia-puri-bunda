@@ -48,7 +48,7 @@
 
 <script setup>
 import { ElMessage } from "element-plus";
-import { ref, reactive, defineEmits, defineExpose, nextTick } from "vue";
+import { ref, reactive, nextTick } from "vue";
 
 const props = defineProps(["unit"]);
 const dialogFormVisible = ref(false);

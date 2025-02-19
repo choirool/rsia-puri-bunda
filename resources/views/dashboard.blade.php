@@ -10,4 +10,8 @@
             <Dashboard />
         </div>
     </div>
+
+    @push('scripts')
+    @vite(['resources/js/dashboard.js'])
+    @endpush
 </x-app-layout>

@@ -15,7 +15,7 @@
 
 <script setup>
 import { ElMessage } from "element-plus";
-import { ref, defineProps, defineEmits } from "vue";
+import { ref } from "vue";
 
 const loading = ref(false);
 const props = defineProps(["unit"]);
