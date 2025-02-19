@@ -48,14 +48,7 @@
 
 <script setup>
 import { ElMessage } from "element-plus";
-import {
-    ref,
-    reactive,
-    defineEmits,
-    defineProps,
-    defineExpose,
-    nextTick,
-} from "vue";
+import { ref, reactive, defineEmits, defineExpose, nextTick } from "vue";
 
 const props = defineProps(["position"]);
 const dialogFormVisible = ref(false);
@@ -77,7 +70,7 @@ const createPosition = async () => {
             errors.value = [];
             form.name = "";
             ElMessage.success("Unit created successfully");
-            emits("unitCreated");
+            emits("positionCreated");
         }
     } catch (error) {
         console.error("Error submitting form:", error);
