@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('units.index')" :active="request()->routeIs('units.index')">
                         {{ __('Units') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('positions.index')" :active="request()->routeIs('positions.index')">
+                        {{ __('Jabatan') }}
+                    </x-nav-link>
                 </div>
             </div>
 
