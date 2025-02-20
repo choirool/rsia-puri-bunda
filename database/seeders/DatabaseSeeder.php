@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\LoginHistory;
 use App\Models\Unit;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -28,5 +29,9 @@ class DatabaseSeeder extends Seeder
                 'username' => 'admin',
                 'password' => bcrypt('password'),
             ]);
+
+        $this->call([
+            LoginHistorySeeder::class,
+        ]);
     }
 }
