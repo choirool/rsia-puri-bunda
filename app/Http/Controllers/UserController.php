@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Responses\User\UserIndexResponse;
+use App\Http\Responses\User\UserStoreResponse;
+use App\Http\Responses\User\UserUpdateResponse;
+use App\Http\Responses\User\UserDestroyResponse;
 
 class UserController extends Controller
 {
@@ -30,9 +35,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        return new UserStoreResponse;
     }
 
     /**
@@ -54,9 +59,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request, string $id)
     {
-        //
+        return new UserUpdateResponse;
     }
 
     /**
@@ -64,6 +69,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return new UserDestroyResponse;
     }
 }

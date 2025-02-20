@@ -24,7 +24,7 @@
                         <Delete
                             :position="scope.row"
                             @positionDeleted="getPositions"
-                        ></Delete>
+                        />
                     </div>
                 </template>
             </el-table-column>

@@ -14,7 +14,7 @@
             <el-form-item label="Unit name">
                 <el-input v-model="form.name" />
                 <span
-                    class="text-red-500"
+                    class="text-red-600"
                     v-if="errors.name"
                     v-text="errors.name[0]"
                 ></span>

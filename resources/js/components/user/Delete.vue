@@ -5,7 +5,7 @@
         :icon="InfoFilled"
         icon-color="#626AEF"
         title="Are you sure to delete this?"
-        @confirm="deletePosition"
+        @confirm="deleteUser"
     >
         <template #reference>
             <el-button type="danger">Delete</el-button>
@@ -18,20 +18,18 @@ import { ElMessage } from "element-plus";
 import { ref } from "vue";
 
 const loading = ref(false);
-const props = defineProps(["position"]);
-const emits = defineEmits(["positionDeleted"]);
+const props = defineProps(["user"]);
+const emits = defineEmits(["userDeleted"]);
 
-const deletePosition = async () => {
+const deleteUser = async () => {
     loading.value = true;
 
     try {
-        const response = await window.axios.delete(
-            `/positions/${props.position.id}`
-        );
+        const response = await window.axios.delete(`/users/${props.user.id}`);
 
         if (response.status === 204) {
-            ElMessage.success("Positions deleted successfully");
-            emits("positionDeleted");
+            ElMessage.success("User deleted successfully");
+            emits("userDeleted");
         }
     } catch (error) {
         console.error("Error deleting unit:", error);

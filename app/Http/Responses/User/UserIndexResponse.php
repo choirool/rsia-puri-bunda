@@ -9,7 +9,10 @@ final class UserIndexResponse implements Responsable
 {
     public function toResponse($request)
     {
-        $users = User::paginate($request->input('per_page', 10));
+        $users = User::query()
+            ->with(['unit', 'positions'])
+            ->paginate($request->input('per_page', 10));
+
         return response()->json($users);
     }
 }

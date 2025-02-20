@@ -17,10 +17,7 @@
                         >
                             Edit
                         </el-button>
-                        <Delete
-                            :unit="scope.row"
-                            @unitDeleted="getUnit"
-                        ></Delete>
+                        <Delete :unit="scope.row" @unitDeleted="getUnit" />
                     </div>
                 </template>
             </el-table-column>

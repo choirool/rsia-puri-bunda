@@ -15,9 +15,49 @@
             <el-form-item label="Name">
                 <el-input v-model="form.name" />
                 <span
-                    class="text-red-500"
+                    class="text-red-600"
                     v-if="errors.name"
                     v-text="errors.name[0]"
+                ></span>
+            </el-form-item>
+            <el-form-item label="Username">
+                <el-input v-model="form.username" />
+                <span
+                    class="text-red-600"
+                    v-if="errors.username"
+                    v-text="errors.username[0]"
+                ></span>
+            </el-form-item>
+            <el-form-item label="Email">
+                <el-input v-model="form.email" />
+                <span
+                    class="text-red-600"
+                    v-if="errors.email"
+                    v-text="errors.email[0]"
+                ></span>
+            </el-form-item>
+            <el-form-item label="Password">
+                <el-input
+                    v-model="form.password"
+                    type="password"
+                    show-password
+                />
+                <span
+                    class="text-red-600"
+                    v-if="errors.password"
+                    v-text="errors.password[0]"
+                ></span>
+            </el-form-item>
+            <el-form-item label="Confirm Password">
+                <el-input
+                    v-model="form.password_confirmation"
+                    type="password"
+                    show-password
+                />
+                <span
+                    class="text-red-600"
+                    v-if="errors.password_confirmation"
+                    v-text="errors.password_confirmation[0]"
                 ></span>
             </el-form-item>
             <el-form-item label="Position">
@@ -39,7 +79,7 @@
                     ></el-option>
                 </el-select>
                 <span
-                    class="text-red-500"
+                    class="text-red-600"
                     v-if="errors.positions"
                     v-text="errors.positions[0]"
                 ></span>
@@ -50,6 +90,7 @@
                     placeholder="Select unit"
                     allow-create
                     filterable
+                    clearable
                     remote-show-suffix
                     remote
                     :remote-method="getUnits"
@@ -62,31 +103,33 @@
                     ></el-option>
                 </el-select>
                 <span
-                    class="text-red-500"
+                    class="text-red-600"
                     v-if="errors.name"
                     v-text="errors.name[0]"
                 ></span>
             </el-form-item>
             <el-form-item label="Joining Date">
-                <el-date-picker
-                    v-model="form.joining_date"
-                    type="date"
-                    placeholder="Select date"
-                    value-format="YYYY-MM-DD"
-                    format="DD MMM YYYY"
-                ></el-date-picker>
-                <span
-                    class="text-red-500"
-                    v-if="errors.joining_date"
-                    v-text="errors.joining_date[0]"
-                ></span>
+                <div class="flex flex-col">
+                    <el-date-picker
+                        v-model="form.joining_date"
+                        type="date"
+                        placeholder="Select date"
+                        value-format="YYYY-MM-DD"
+                        format="DD MMM YYYY"
+                    ></el-date-picker>
+                    <span
+                        class="text-red-600"
+                        v-if="errors.joining_date"
+                        v-text="errors.joining_date[0]"
+                    ></span>
+                </div>
             </el-form-item>
             <div class="flex justify-end">
                 <el-form-item>
                     <el-button
-                        v-if="props.position"
+                        v-if="props.user"
                         type="primary"
-                        @click="updatePosition"
+                        @click="updateUser"
                         :loading="loading"
                     >
                         Update
@@ -94,7 +137,7 @@
                     <el-button
                         v-else
                         type="primary"
-                        @click="createPosition"
+                        @click="createUser"
                         :loading="loading"
                     >
                         Create
@@ -116,9 +159,13 @@ const props = defineProps(["user"]);
 const dialogFormVisible = ref(false);
 const loading = ref(false);
 const errors = ref([]);
-const emits = defineEmits(["positionCreated"]);
+const emits = defineEmits(["userCreated"]);
 const form = reactive({
     name: "",
+    username: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
     positions: [],
     unit: "",
     joining_date: "",
@@ -146,15 +193,52 @@ const getUnits = async (query) => {
     }
 };
 
+const createUser = async () => {
+    loading.value = true;
+    try {
+        await axios.post("/users", form);
+        ElMessage.success("User created successfully");
+        emits("userCreated");
+        dialogFormVisible.value = false;
+    } catch (error) {
+        errors.value = error.response.data.errors;
+    } finally {
+        loading.value = false;
+    }
+};
+
+const updateUser = async () => {
+    loading.value = true;
+    try {
+        await axios.put(`/users/${props.user.id}`, form);
+        ElMessage.success("User updated successfully");
+        emits("userCreated");
+        dialogFormVisible.value = false;
+    } catch (error) {
+        errors.value = error.response.data.errors;
+    } finally {
+        loading.value = false;
+    }
+};
+
 const openDialog = () => {
     nextTick(() => {
         dialogFormVisible.value = true;
         form.name = props.user.name;
+        form.username = props.user.username;
+        form.email = props.user.email;
+        form.positions = props.user.positions.map((position) => position.id);
+        form.unit = props.user.unit.id;
+        form.joining_date = props.user.joining_date;
     });
 };
 
 const dialogClosed = () => {
     form.name = "";
+    form.username = "";
+    form.email = "";
+    form.password = "";
+    form.password_confirmation = "";
     form.positions = [];
     form.unit = "";
     form.joining_date = "";

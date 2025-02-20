@@ -1,13 +1,23 @@
 <template>
     <div>
-        <Form
-            @positionCreated="getUsers"
-            :position="selectedPosition"
-            ref="positionForm"
-        />
+        <Form @userCreated="getUsers" :user="selectedUser" ref="userForm" />
         <el-table :data="users" style="width: 100%" v-loading="loading">
             <el-table-column prop="id" label="ID" width="50" />
             <el-table-column prop="name" label="Name" />
+            <el-table-column prop="email" label="Email" />
+            <el-table-column prop="username" label="Username" />
+            <el-table-column prop="joining_date" label="Join Date" />
+            <el-table-column prop="unit.name" label="Unit" />
+            <el-table-column label="Position">
+                <template #default="scope">
+                    <span
+                        v-for="position in scope.row.positions"
+                        :key="position.id"
+                    >
+                        {{ position.name }}
+                    </span>
+                </template>
+            </el-table-column>
             <el-table-column label="Action" width="150">
                 <template #default="scope">
                     <div class="flex justify-center">
@@ -15,16 +25,13 @@
                             size="mini"
                             type="primary"
                             @click="
-                                selectedPosition = scope.row;
-                                $refs.positionForm.openDialog();
+                                selectedUser = scope.row;
+                                $refs.userForm.openDialog();
                             "
                         >
                             Edit
                         </el-button>
-                        <Delete
-                            :position="scope.row"
-                            @positionDeleted="getUsers"
-                        ></Delete>
+                        <Delete :user="scope.row" @userDeleted="getUsers" />
                     </div>
                 </template>
             </el-table-column>
@@ -50,7 +57,7 @@ const Form = defineAsyncComponent(() => import("./Form.vue"));
 const Delete = defineAsyncComponent(() => import("./Delete.vue"));
 
 const users = ref([]);
-const selectedPosition = ref(null);
+const selectedUser = ref(null);
 const loading = ref(false);
 const pagination = reactive({
     currentPage: 1,
