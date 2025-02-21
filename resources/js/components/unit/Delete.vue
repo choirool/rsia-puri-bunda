@@ -25,7 +25,7 @@ const deleteUnit = async () => {
     loading.value = true;
 
     try {
-        const response = await window.axios.delete(`/units/${props.unit.id}`);
+        const response = await axios.delete(`/units/${props.unit.id}`);
 
         if (response.status === 204) {
             ElMessage.success("Unit deleted successfully");

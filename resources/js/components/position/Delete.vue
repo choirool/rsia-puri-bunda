@@ -25,9 +25,7 @@ const deletePosition = async () => {
     loading.value = true;
 
     try {
-        const response = await window.axios.delete(
-            `/positions/${props.position.id}`
-        );
+        const response = await axios.delete(`/positions/${props.position.id}`);
 
         if (response.status === 204) {
             ElMessage.success("Positions deleted successfully");

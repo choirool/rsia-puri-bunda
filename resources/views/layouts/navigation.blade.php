@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('units.index')" :active="request()->routeIs('units.index')">
-                        {{ __('Units') }}
+                        {{ __('Unit') }}
                     </x-nav-link>
                     <x-nav-link :href="route('positions.index')" :active="request()->routeIs('positions.index')">
                         {{ __('Jabatan') }}

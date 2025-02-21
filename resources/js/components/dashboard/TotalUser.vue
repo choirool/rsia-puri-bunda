@@ -36,11 +36,9 @@ const getTotalUser = async () => {
             end_date: filterDate.value[1],
         };
     }
-    await window.axios
-        .get("/dashboard/total-users", { params })
-        .then((response) => {
-            totalUser.value = response.data.data;
-        });
+    await axios.get("/dashboard/total-users", { params }).then((response) => {
+        totalUser.value = response.data.data;
+    });
 };
 
 watch(filterDate, async () => {

@@ -8,7 +8,7 @@
             <el-table-column prop="username" label="Username" />
             <el-table-column prop="joining_date" label="Join Date" />
             <el-table-column prop="unit.name" label="Unit" />
-            <el-table-column label="Position">
+            <el-table-column label="Jabatan">
                 <template #default="scope">
                     <span
                         v-for="position in scope.row.positions"
@@ -76,7 +76,7 @@ const handleCurrentChange = (val) => {
 };
 
 const getUsers = async () => {
-    await window.axios
+    await axios
         .get("/users", {
             params: {
                 page: pagination.currentPage,

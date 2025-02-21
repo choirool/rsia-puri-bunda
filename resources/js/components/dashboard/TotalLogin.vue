@@ -37,7 +37,7 @@ const getTotalLogin = async () => {
         };
     }
 
-    await window.axios
+    await axios
         .get("/dashboard/total-login-history", { params })
         .then((response) => {
             totalLogin.value = response.data.data;

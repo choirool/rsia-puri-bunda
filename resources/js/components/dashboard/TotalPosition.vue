@@ -16,7 +16,7 @@ import { onMounted, ref } from "vue";
 const totalPosition = ref(0);
 
 const getTotalPosition = async () => {
-    await window.axios.get("/dashboard/total-positions").then((response) => {
+    await axios.get("/dashboard/total-positions").then((response) => {
         totalPosition.value = response.data.data;
     });
 };

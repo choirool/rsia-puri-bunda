@@ -42,7 +42,7 @@ const getTopTenUserLogin = async () => {
             end_date: filterDate.value[1],
         };
     }
-    await window.axios
+    await axios
         .get("/dashboard/top-ten-user-login", { params })
         .then((response) => {
             topTenUserLogin.value = response.data.data;

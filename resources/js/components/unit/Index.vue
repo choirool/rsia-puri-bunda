@@ -62,7 +62,7 @@ const handleCurrentChange = (val) => {
 };
 
 const getUnit = async () => {
-    await window.axios
+    await axios
         .get("/units", {
             params: {
                 page: pagination.currentPage,

@@ -63,7 +63,7 @@ const createUnit = async () => {
     loading.value = true;
 
     try {
-        const response = await window.axios.post("/units", form);
+        const response = await axios.post("/units", form);
 
         if (response.status === 201) {
             dialogFormVisible.value = false;
@@ -86,10 +86,7 @@ const updateUnit = async () => {
     loading.value = true;
 
     try {
-        const response = await window.axios.put(
-            `/units/${props.unit.id}`,
-            form
-        );
+        const response = await axios.put(`/units/${props.unit.id}`, form);
 
         if (response.status === 200) {
             dialogFormVisible.value = false;

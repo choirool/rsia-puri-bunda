@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.el-input__inner:focus,
+.el-range-input:focus,
+.el-select__input:focus{
+  @apply shadow-none ring-0 !important;
+}

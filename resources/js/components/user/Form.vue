@@ -60,7 +60,7 @@
                     v-text="errors.password_confirmation[0]"
                 ></span>
             </el-form-item>
-            <el-form-item label="Position">
+            <el-form-item label="Jabatan">
                 <el-select
                     v-model="form.positions"
                     placeholder="Select position"

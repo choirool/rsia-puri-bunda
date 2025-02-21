@@ -16,7 +16,7 @@ import { onMounted, ref } from "vue";
 const totalUnit = ref(0);
 
 const getTotalUnit = async () => {
-    await window.axios.get("/dashboard/total-units").then((response) => {
+    await axios.get("/dashboard/total-units").then((response) => {
         totalUnit.value = response.data.data;
     });
 };

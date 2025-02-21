@@ -63,7 +63,7 @@ const createPosition = async () => {
     loading.value = true;
 
     try {
-        const response = await window.axios.post("/positions", form);
+        const response = await axios.post("/positions", form);
 
         if (response.status === 201) {
             dialogFormVisible.value = false;
@@ -86,7 +86,7 @@ const updatePosition = async () => {
     loading.value = true;
 
     try {
-        const response = await window.axios.put(
+        const response = await axios.put(
             `/positions/${props.position.id}`,
             form
         );
